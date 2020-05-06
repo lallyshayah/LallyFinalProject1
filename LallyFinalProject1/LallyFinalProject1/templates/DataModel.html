@@ -1,0 +1,57 @@
+﻿﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<h2 style="color:skyblue ">{{title}}</h2>
+<h3 style="color:palegreen">{{ message }}</h3>
+
+<div class="row">
+    <div class="col-md-7">
+        Here you can see 4 different datasets each about a specific president,
+        you can see the impression of the citizens about the president at many diferent dates
+        during the presidents Presidency.
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4"> <img src="https://iclgroupv2.s3.amazonaws.com/corporateil/wp-content/uploads/sites/1005/2017/12/bigstock-United-States-Of-America-Flag-650785.jpg" width="260" height="160"> </div>
+    <div class="col-md-4"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Map_of_USA_with_state_names_2.svg/1200px-Map_of_USA_with_state_names_2.svg.png" width="260" height="160"> </div>
+    <div class="col-md-4"> <img src="https://cdn.britannica.com/82/183382-050-D832EC3A/Detail-head-crown-Statue-of-Liberty-New.jpg" width="260" height="160"> </div>
+</div>
+<br />
+
+<div class="row" style="">
+    <div class="col-md-4"><strong>Dataset's name</strong></div>
+    <div class="col-md-4"><strong>Short explanation</strong></div>
+    <div class="col-md-4"><strong>Link to the dataset</strong></div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-4"> Bill Clinton </div>
+    <div class="col-md-4"> citizens' impression of Bill Clinton </div>
+    <div class="col-md-4"><a href="{{ url_for('DataSet1') }}">Go to Bill Clinton data set</a></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"> Barack Obama </div>
+    <div class="col-md-4"> citizens' impression of Barack Obama </div>
+    <div class="col-md-4"><a href="{{ url_for('DataSet2') }}">Go to Barack Obama data set</a></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"> George Bush </div>
+    <div class="col-md-4"> citizens' impression of George Bush </div>
+    <div class="col-md-4"><a href="{{ url_for('DataSet3') }}">Go to George Bush data set</a></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"> Donald Trump </div>
+    <div class="col-md-4"> citizens' impression of Donald Trump </div>
+    <div class="col-md-4"><a href="{{ url_for('DataSet4') }}">Go to Donald Trump data set</a></div>
+</div>
+
+
+
+
+    {% endblock %}
