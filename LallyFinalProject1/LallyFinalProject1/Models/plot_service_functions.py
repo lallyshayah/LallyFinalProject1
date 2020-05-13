@@ -1,15 +1,15 @@
-import base64
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
-from os import path
-import io
+import base64 #מביאה מבחוץ
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas #מביאה מהסביבה
+from matplotlib.figure import Figure #מביאה מהסביבה
+import pandas as pd #מביאה מבחוץ
+import numpy as np #מביאה מבחוץ
+import matplotlib.pyplot as plt #מביאה מבחוץ
+import datetime #מביאה מבחוץ
+from os import path #מביאה מבחוץ 
+import io 
 
 
-def plot_case_1(df , start_date , end_date , kind):
+def plot_case_1(df ,  kind):
     print("Running from plot_case_1()")
     rd = {}
     start_date_series = df['Start Date']
@@ -17,6 +17,9 @@ def plot_case_1(df , start_date , end_date , kind):
     df['Date'] = ts
     df = df.set_index('Date')
     df1 = df[str(end_date) : str(start_date)]
+    #df1 = df[str(end_date) : str(start_date)]
+    #list(df.index)[-1].value
+    #pd.to_datetime(list(df.index)[-1].value) + pd.DateOffset(years=1)
     series_approving = df1['Approving']
     if series_approving.empty:
         rd['isempty'] = 'empty'
@@ -31,7 +34,7 @@ def plot_case_1(df , start_date , end_date , kind):
         pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')
         rd['isempty'] = ''
         rd['img'] = pngImageB64String
-        # return pngImageB64String
+        #return pngImageB64String
     return rd
 
 
