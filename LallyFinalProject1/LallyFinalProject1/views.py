@@ -99,24 +99,7 @@ def data():
         img_clinton = '/static/imgs/clinton.jpg'
     )
 
-def getfirstyear (df):
-   
-    firstyear = 3000
-    
-    for start_time in df[df.columns[0]]:
-         d = pd.to_datetime(start_time)
-         if (firstyear > d.year):
-             firstyear = d.year
-    print (firstyear)
-    return firstyear
 
-#def getalldatafirstyear (df):
-    
-
-
-
-    #list(df.index)[-1].value
-    #pd.to_datetime(list(df.index)[-1].value) + pd.DateOffset(years=1)
      
 @app.route('/query' , methods = ['GET' , 'POST'])
 def query():
@@ -124,27 +107,43 @@ def query():
     print("Query")
 
     form1 = SinglePresidentForm()#פעולה בונה של הטופס
-    chart = {}
+    chart = "https://iclgroupv2.s3.amazonaws.com/corporateil/wp-content/uploads/sites/1005/2017/12/bigstock-United-States-Of-America-Flag-650785.jpg"
     height_case_1 = "100"
     width_case_1 = "250"
 
     df_trump = pd.read_csv(path.join(path.dirname(__file__), 'static/data/trump.csv'))
-    getfirstyear(df_trump)
     df_obama = pd.read_csv(path.join(path.dirname(__file__), 'static/data/obama.csv'))
     df_bush = pd.read_csv(path.join(path.dirname(__file__), 'static/data/bush.csv'))
     df_clinton = pd.read_csv(path.join(path.dirname(__file__), 'static/data/clinton.csv'))
-    presidents_dict = {'trump' : df_trump , 'obama' : df_obama , 'bush' : df_bush , 'clinton' : df_clinton }
+    #presidents_dict = {'trump' : df_trump , 'obama' : df_obama , 'bush' : df_bush , 'clinton' : df_clinton }
 
-    if request.method == 'POST':
-        president = form1.president.data 
-        #start_date = form1.start_date.data
-        #end_date = form1.end_date.data
+    if request.method == 'POST': #תנאי: רק אם המשתמש לוחץ הצג
+        president = form1.president.data #רשימה של הנשיאים שהמשתמש בחר
+        t = pd.DataFrame(index = range(0,12)) #ממלא טבלה חדשה שאמלא בהמשך בכל הדגימות של כל חודש של השנה הראשונה של כל נשיא
+        dfl = [df_trump , df_obama , df_bush , df_clinton]
+        dflnames = ['trump' , 'obama' , 'bush' , 'clinton'] 
+        i = 0
+        for df in dfl: #לולאת פור שעוברת על כל איבר בתוך הרשימה שנקראת dfl
+            df = df[['Start Date' , 'Approving']] # יוצר טבלה חדשה רק עם העמודות Start Date, Approving
+            df = df.set_index('Start Date') #הופכת את start date לאינדקס של הדאטהפריים
+            df.index = pd.to_datetime(df.index) # הופכת את האינדקס ממשתנה מסוג סטרינג למשתנה מסוג date time
+            s = df['Approving'] #   יוצרת סדרה מתוך הדאטהפריים
+            s = s.resample('M').mean() # הופכת את הסדרה לפי חודשים
+            s = s[0:12].to_list() # לוקחת את 12 החודשים הראשונים מהסדרה
+            t[dflnames[i]] = s #מוסיף את הסדרה לתוך טבלה חדשה בעלת 5 עמדוות ו12 שורות אחת לכל חודש
+            i = i + 1
+
         kind = form1.kind.data
         height_case_1 = "300"
         width_case_1 = "750"
 
      
-        chart = plot_case_1(presidents_dict[president] , kind)
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        t[president].plot(ax = ax , kind = kind , figsize = (24, 24) , fontsize = 22 , grid = True)
+        print(t)
+        print(president)
+        chart = plot_to_img(fig)
 
     
     return render_template(

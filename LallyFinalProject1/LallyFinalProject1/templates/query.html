@@ -34,36 +34,7 @@
         </form>
     </div>
     <div class="col-md-8">
-        {% if src_case_1 %}
-        {% if src_case_1.isempty %}
-        <p style="text-align: center;">&nbsp;</p>
-
-        <p style="text-align: center;">&nbsp;</p>
-
-        <p style="text-align: center;"><strong><span style="color:#ff0000"><font face="Tahoma, Geneva, sans-serif"><span style="font-size:16px">הסדרה המבוקשת ריקה!</span></font></span></strong></p>
-
-        <p style="text-align: center;"><span style="color:#ff0000"><font face="Tahoma, Geneva, sans-serif"><span style="font-size:16px">כנראה טעות בהקלדת התאריכים בטופס.</span></font></span></p>
-
-
-        <p style="text-align: center;">&nbsp;</p>
-        {% else %}
-        <img src={{ src_case_1.img }} class="img-thumbnail" alt="not found" height={{height_case_1}} width={{ width_case_1}}>
-        {% endif %}
-        {% else %}
-        <p style="text-align: center;">&nbsp;</p>
-
-        <p style="text-align: center;">&nbsp;</p>
-
-        <p style="text-align: center;"><span style="color:#add8e6"><span style="font-size:16px"><span style="font-family:Tahoma,Geneva,sans-serif">כאן יופיע הגרף אחרי שתמלאו את הטופס ותלחצו על </span></span></span><span style="color:#0000ff"><strong><span style="font-size:16px"><span style="font-family:Tahoma,Geneva,sans-serif">הצג</span></span></strong></span><span style="color:#add8e6"><span style="font-size:16px"><span style="font-family:Tahoma,Geneva,sans-serif">.</span></span></span></p>
-
-        <p style="text-align: center;"><span style="color:#add8e6"><span style="font-size:16px"><font face="Tahoma, Geneva, sans-serif">כשבחרתם נשיא מסויים, וודאו שתאריך ההתחלה והסיום הם בתחום תקופת כהונתו. תקופות הכהונה של כל נשיא רשומות כאן משמאל.</font></span></span></p>
-
-        <p style="text-align: center;"><span style="color:#add8e6"><span style="font-size:16px"><font face="Tahoma, Geneva, sans-serif">אם התאריכים שנבחרו אינם תואמים את תקופת הכהונה, או אין עבורם דאטה, או תאריך ההתחלה הוא מאוחר יותר מתאריך הסיום, תצא הודעה מתאימה במקום גרף</font></span></span></p>
-
-        <p style="text-align: center;"><span style="color:#add8e6"><span style="font-size:16px"><font face="Tahoma, Geneva, sans-serif">הטופס נותן לכם לבחור איזה סוג גרף אתם רוצים</font></span></span></p>
-
-        <p style="text-align: center;">&nbsp;</p>
-        {% endif %}
+        <img src={{ src_case_1 }} class="img-thumbnail" alt="not found" height={{height_case_1}} width={{ width_case_1}}>
     </div>
 </div>
 

@@ -28,7 +28,7 @@ class CollapseForm(FlaskForm):
     value="Collapse"
 
 class SinglePresidentForm(FlaskForm):
-    president = MultiCheckboxField('President' , validators = [DataRequired] , choices=[('trump', 'Trump'), ('obama', 'Obama'), ('bush', 'Bush') , ('clinton', 'Clinton')])
+    president = SelectMultipleField('President' , validators = [DataRequired] , choices=[('trump', 'Trump'), ('obama', 'Obama'), ('bush', 'Bush') , ('clinton', 'Clinton')])
     #start_date = DateField('Start Date' , format='%Y-%m-%d' , validators = [DataRequired])
     #end_date = DateField('End Date' , format='%Y-%m-%d' , validators = [DataRequired])
     kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('line', 'line'), ('bar', 'bar')])
