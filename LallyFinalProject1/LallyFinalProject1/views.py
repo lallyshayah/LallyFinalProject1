@@ -128,21 +128,19 @@ def query():
             df = df.set_index('Start Date') #הופכת את start date לאינדקס של הדאטהפריים
             df.index = pd.to_datetime(df.index) # הופכת את האינדקס ממשתנה מסוג סטרינג למשתנה מסוג date time
             s = df['Approving'] #   יוצרת סדרה מתוך הדאטהפריים
-            s = s.resample('M').mean() # הופכת את הסדרה לפי חודשים
+            s = s.resample('M').mean() # הופכת את הסדרה לפי חודשים - למשל אם יש שלושה תאריכים באותו חודש היא עושה ממוצע 
             s = s[0:12].to_list() # לוקחת את 12 החודשים הראשונים מהסדרה
-            t[dflnames[i]] = s #מוסיף את הסדרה לתוך טבלה חדשה בעלת 5 עמדוות ו12 שורות אחת לכל חודש
+            t[dflnames[i]] = s # גורם לסדרה להיכנס לתוך טבלה חדשה בעלת 5 עמדוות ו12 שורות אחת לכל חודש
             i = i + 1
 
         kind = form1.kind.data
-        height_case_1 = "300"
-        width_case_1 = "750"
+        height_case_1 = "600"
+        width_case_1 = "1200"
 
      
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        t[president].plot(ax = ax , kind = kind , figsize = (24, 24) , fontsize = 22 , grid = True)
-        print(t)
-        print(president)
+        t[president].plot(ax = ax , kind = kind , figsize = (24, 18) , fontsize = 22 , grid = True)
         chart = plot_to_img(fig)
 
     
