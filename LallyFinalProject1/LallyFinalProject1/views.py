@@ -17,7 +17,6 @@ from LallyFinalProject1.Models.Forms import ExpandForm
 from LallyFinalProject1.Models.Forms import CollapseForm
 from LallyFinalProject1.Models.Forms import SinglePresidentForm
 from LallyFinalProject1.Models.plot_service_functions import plot_to_img
-from LallyFinalProject1.Models.plot_service_functions import plot_case_1
 from LallyFinalProject1.Models.QueryFormStructure import QueryFormStructure 
 from LallyFinalProject1.Models.QueryFormStructure import LoginFormStructure 
 from LallyFinalProject1.Models.QueryFormStructure import UserRegistrationFormStructure 
@@ -91,7 +90,7 @@ def data():
     return render_template(
         'data.html',
         title='Data',
-        year=datetime.now().year,
+        year=datetime.now().year, 
         message='My data page.',
         img_trump = '/static/imgs/trump.jpg',
         img_obama = '/static/imgs/obama.jpg',
@@ -115,7 +114,7 @@ def query():
     df_obama = pd.read_csv(path.join(path.dirname(__file__), 'static/data/obama.csv'))
     df_bush = pd.read_csv(path.join(path.dirname(__file__), 'static/data/bush.csv'))
     df_clinton = pd.read_csv(path.join(path.dirname(__file__), 'static/data/clinton.csv'))
-    #presidents_dict = {'trump' : df_trump , 'obama' : df_obama , 'bush' : df_bush , 'clinton' : df_clinton }
+ 
 
     if request.method == 'POST': #תנאי: רק אם המשתמש לוחץ הצג
         president = form1.president.data #רשימה של הנשיאים שהמשתמש בחר
@@ -135,7 +134,7 @@ def query():
 
         kind = form1.kind.data
         height_case_1 = "600"
-        width_case_1 = "1200"
+        width_case_1 = "1200"  
 
      
         fig = plt.figure()

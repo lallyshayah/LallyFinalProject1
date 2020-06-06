@@ -20,9 +20,7 @@ from wtforms.validators import DataRequired
 ##   the 'name' field - will be used to get the country name
 ##   the 'submit' button - the button the user will press to have the 
 ##                         form be "posted" (sent to the server for process)
-class QueryFormStructure(FlaskForm):
-    name   = StringField('Country Name:  ' , validators = [DataRequired()])
-    submit = SubmitField('Submit')
+
 
 
 

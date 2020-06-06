@@ -31,9 +31,6 @@
     <Compile Include="LallyFinalProject1\Models\Forms.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LallyFinalProject1\Models\general_service_functions.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="LallyFinalProject1\Models\LocalDatabaseRoutines.py">
       <SubType>Code</SubType>
     </Compile>

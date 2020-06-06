@@ -1,6 +1,9 @@
 """
 Used structures and classes
 """
+
+#בשביל הרגיסטר והלוג אין
+
 from os import path
 import json
 import pandas as pd

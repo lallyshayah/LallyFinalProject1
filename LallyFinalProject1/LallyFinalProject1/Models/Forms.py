@@ -12,11 +12,6 @@ from wtforms import widgets
 from wtforms.validators import DataRequired
 from wtforms.validators import InputRequired
 
-
-class MultiCheckboxField(SelectMultipleField):
-    widget = widgets.ListWidget(prefix_label=False)
-    option_widget = widgets.CheckboxInput()
-
 class ExpandForm(FlaskForm):
     submit1 = SubmitField('Expand')
     name="Expand" 
@@ -29,8 +24,6 @@ class CollapseForm(FlaskForm):
 
 class SinglePresidentForm(FlaskForm):
     president = SelectMultipleField('President' , validators = [DataRequired] , choices=[('trump', 'Trump'), ('obama', 'Obama'), ('bush', 'Bush') , ('clinton', 'Clinton')])
-    #start_date = DateField('Start Date' , format='%Y-%m-%d' , validators = [DataRequired])
-    #end_date = DateField('End Date' , format='%Y-%m-%d' , validators = [DataRequired])
     kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('line', 'line'), ('bar', 'bar')])
     subnmit = SubmitField('הצג')
 
