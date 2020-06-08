@@ -17,7 +17,7 @@ from LallyFinalProject1.Models.Forms import ExpandForm
 from LallyFinalProject1.Models.Forms import CollapseForm
 from LallyFinalProject1.Models.Forms import SinglePresidentForm
 from LallyFinalProject1.Models.plot_service_functions import plot_to_img
-from LallyFinalProject1.Models.QueryFormStructure import QueryFormStructure 
+#from LallyFinalProject1.Models.QueryFormStructure import QueryFormStructure 
 from LallyFinalProject1.Models.QueryFormStructure import LoginFormStructure 
 from LallyFinalProject1.Models.QueryFormStructure import UserRegistrationFormStructure 
 
@@ -105,11 +105,12 @@ def query():
 
     print("Query")
 
-    form1 = SinglePresidentForm()#פעולה בונה של הטופס
-    chart = "https://iclgroupv2.s3.amazonaws.com/corporateil/wp-content/uploads/sites/1005/2017/12/bigstock-United-States-Of-America-Flag-650785.jpg"
-    height_case_1 = "100"
-    width_case_1 = "250"
+    form1 = SinglePresidentForm()# פעולה בונה של הטופס (רק עם הנשיאים שהמשתמש בחר(
+    chart = "https://iclgroupv2.s3.amazonaws.com/corporateil/wp-content/uploads/sites/1005/2017/12/bigstock-United-States-Of-America-Flag-650785.jpg" #תמונה שתוצג לפני שיוצג הגרף
+    height_case_1 = "100" # גובה התמונה
+    width_case_1 = "250" # רוחב התמונה
 
+    # קורא את הדאטה סט ומחזיר אותו בצורה של דאטה פריים (טבלה)
     df_trump = pd.read_csv(path.join(path.dirname(__file__), 'static/data/trump.csv'))
     df_obama = pd.read_csv(path.join(path.dirname(__file__), 'static/data/obama.csv'))
     df_bush = pd.read_csv(path.join(path.dirname(__file__), 'static/data/bush.csv'))
@@ -118,7 +119,7 @@ def query():
 
     if request.method == 'POST': #תנאי: רק אם המשתמש לוחץ הצג
         president = form1.president.data #רשימה של הנשיאים שהמשתמש בחר
-        t = pd.DataFrame(index = range(0,12)) #ממלא טבלה חדשה שאמלא בהמשך בכל הדגימות של כל חודש של השנה הראשונה של כל נשיא
+        t = pd.DataFrame(index = range(0,24)) #מכין טבלה חדשה שאמלא בהמשך בכל הדגימות של כל חודש של השנה הראשונה של כל נשיא
         dfl = [df_trump , df_obama , df_bush , df_clinton]
         dflnames = ['trump' , 'obama' , 'bush' , 'clinton'] 
         i = 0
@@ -128,21 +129,21 @@ def query():
             df.index = pd.to_datetime(df.index) # הופכת את האינדקס ממשתנה מסוג סטרינג למשתנה מסוג date time
             s = df['Approving'] #   יוצרת סדרה מתוך הדאטהפריים
             s = s.resample('M').mean() # הופכת את הסדרה לפי חודשים - למשל אם יש שלושה תאריכים באותו חודש היא עושה ממוצע 
-            s = s[0:12].to_list() # לוקחת את 12 החודשים הראשונים מהסדרה
-            t[dflnames[i]] = s # גורם לסדרה להיכנס לתוך טבלה חדשה בעלת 5 עמדוות ו12 שורות אחת לכל חודש
+            s = s[0:24].to_list() #  לוקחת את 12 החודשים הראשונים מהסדרה
+            t[dflnames[i]] = s # גורם לסדרה להיכנס לתוך טבלה חדשה בעלת 5 עמדוות ( 4 עמודות ל4 הנשיאים ועמוד לאינדקס) ו12 שורות אחת לכל חודש
             i = i + 1
 
-        kind = form1.kind.data
-        height_case_1 = "600"
-        width_case_1 = "1200"  
+        kind = form1.kind.data #סוג הגרף
+        height_case_1 = "600" #גודל הגרף
+        width_case_1 = "1200" #גודל הגרף
 
      
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        t[president].plot(ax = ax , kind = kind , figsize = (24, 18) , fontsize = 22 , grid = True)
-        chart = plot_to_img(fig)
+        t[president].plot(ax = ax , kind = kind , figsize = (24, 18) , fontsize = 22 , grid = True)#גורם לכך שהדאטה פריים יהיה רק עם העמדוודת של הנשיאים שנבחרו על ידי המשתמש
+        chart = plot_to_img(fig) #הופכת את הגרף לתמונה   
 
-    
+    #מחזיר את הכול לקווארי html
     return render_template(
         'query.html',
         form1 = form1,
